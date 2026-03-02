@@ -152,4 +152,4 @@ It intentionally does not include:
 
 ## Learning Approach
 
-This project reflects my learning-by-doing approach — building small but structured systems to understand how real deployments work before moving to more advanced tools.
+This project reflects my learning-by-doing approach, building small but structured systems to understand how real deployments work before moving to more advanced tools.
