@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Project</title>
+    <style>
+        body { font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f4f4f9; }
+        .card { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); text-align: center; }
+        h1 { color: #333; }
+        #message { color: #007bff; font-weight: bold; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>3-Tier DevOps Architecture</h1>
+        <p>Message from Backend Database:</p>
+        <div id="message">Loading...</div>
+    </div>
+
+    <script>
+        // Notice we are calling a relative path. Nginx will route this to the backend!
+        fetch('/api')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('message').innerText = data.message || data.error;
+            })
+            .catch(error => {
+                document.getElementById('message').innerText = "Error fetching data.";
+                console.error('Error:', error);
+            });
+    </script>
+</body>
+</html>
