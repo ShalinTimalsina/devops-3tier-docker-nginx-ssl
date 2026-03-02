@@ -1,4 +1,4 @@
-# 📦 3-Tier Containerized Web Application (Learning Project)
+# 📦 3-Tier Containerized Web Application in AWS EC2 (Learning Project)
 
 This is a foundational DevOps practice project where I’m learning real-world deployment concepts by building a simple 3-tier containerized application.
 
