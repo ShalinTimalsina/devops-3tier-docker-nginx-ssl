@@ -12,6 +12,26 @@ The goal is not complexity, but understanding how modern applications are struct
 Client → Nginx (Reverse Proxy) → Frontend / Backend → PostgreSQL
 ```
 
+```bash
+Devops-Project/
+│
+├── backend/               # Node.js backend API
+│   ├── Dockerfile
+│   ├── package.json
+│   └── server.js
+│
+├── frontend/              # Frontend static site
+│   ├── Dockerfile
+│   └── index.html
+│
+├── nginx/                 # Reverse proxy + SSL configuration
+│   └── (nginx.conf)
+│
+├── init.sql               # PostgreSQL initialization script
+├── docker-compose.yml     # Orchestration for all services
+├── .env                   # Environment variables (not committed)
+└── README.md
+
 ### 1️⃣ Frontend
 - Static site
 - Served via Nginx
