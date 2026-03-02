@@ -9,4 +9,4 @@ This project is a fully containerized 3‑tier web application consisting of:
 - ☁️ Cloudflare DNS (DNS‑Only Mode): Domain management
 - 🐳 Docker Compose: Orchestrates all services into a unified stack
 
-## This setup demonstrates a production‑style deployment following industry‑standard DevOps practices — including containerization, reverse proxying, SSL automation, networking, and persistent data management.
+- This setup demonstrates a production‑style deployment following industry‑standard DevOps practices — including containerization, reverse proxying, SSL automation, networking, and persistent data management.
