@@ -128,7 +128,7 @@ Make sure to replace:
 ```bash
 <yourdomain.com>
 ```
-- For example `www.example.com` in place of `<yourdomain.com>`
+- For example `www.example.com` or `example.com` in place of `<yourdomain.com>`
 with your real domain name.
 
 ---
