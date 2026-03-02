@@ -31,6 +31,8 @@ Devops-Project/
 ├── docker-compose.yml     # Orchestration for all services
 ├── .env                   # Environment variables (not committed)
 └── README.md
+```
+---
 
 ### 1️⃣ Frontend
 - Static site
