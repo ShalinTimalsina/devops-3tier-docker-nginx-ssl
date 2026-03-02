@@ -78,7 +78,7 @@ sudo apt install certbot -y
 
 Before running:
 - Port 80 must be open
-- Domain must point to your VPS
+- Domain must point to your Public IP of the EC2 instance.
 - Cloudflare must be set to DNS-Only (grey cloud)
 
 ```bash
@@ -116,7 +116,7 @@ sudo certbot renew
 
 ---
 
-## 📌 Scope
+##  Scope
 
 This is a hands-on learning project focused on deployment fundamentals.
 
@@ -128,6 +128,6 @@ It intentionally does not include:
 
 ---
 
-## 🚀 Learning Approach
+## Learning Approach
 
 This project reflects my learning-by-doing approach — building small but structured systems to understand how real deployments work before moving to more advanced tools.
