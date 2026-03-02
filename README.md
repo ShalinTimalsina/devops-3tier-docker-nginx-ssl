@@ -1,255 +1,133 @@
 # 📦 3-Tier Containerized Web Application (Learning Project)
 
-This is a foundational DevOps learning project where I am practicing real-world deployment concepts by building and containerizing a simple 3-tier web application.
+This is a foundational DevOps practice project where I’m learning real-world deployment concepts by building a simple 3-tier containerized application.
 
-The goal of this project is not to build a large-scale production system, but to understand how modern applications are structured, secured, and deployed using containers and supporting infrastructure.
-
-This project reflects my “learning by doing” approach to improving my DevOps and infrastructure skills.
+The goal is not complexity — but understanding how modern applications are structured, secured, and deployed.
 
 ---
 
-# 🧠 What I’m Practicing Here
+## 🏗 Architecture
 
-- 3-tier architecture design
-- Containerization with Docker
-- Service orchestration using Docker Compose
-- Reverse proxy configuration
-- SSL certificate generation with Let’s Encrypt
-- DNS configuration using Cloudflare
-- Persistent database storage with Docker volumes
-- Basic production-style deployment flow
+```
+Client → Nginx (Reverse Proxy) → Frontend / Backend → PostgreSQL
+```
 
----
-
-# 🏗 Architecture Overview
-
-The application follows a standard 3-tier architecture:
-
-Client → Nginx Reverse Proxy → Frontend / Backend → PostgreSQL
-
----
-
-## 1️⃣ Frontend (Presentation Layer)
-
-- Static website
+### 1️⃣ Frontend
+- Static site
 - Served via Nginx
-- Runs inside its own container
-- Sends API requests to the backend
+- Runs in its own container
 
-Purpose:
-Handles user interface and interacts with backend endpoints.
-
----
-
-## 2️⃣ Backend API (Application Layer)
-
-- Built using Node.js
-- Runs in a dedicated container
-- Exposes RESTful endpoints
-- Contains basic application logic
+### 2️⃣ Backend
+- Node.js API
+- Runs in a separate container
+- Exposes REST endpoints
 - Connects to PostgreSQL
 
-Purpose:
-Processes client requests and communicates with the database.
+### 3️⃣ Database
+- PostgreSQL 15-alpine
+- Uses Docker volumes for persistent storage
 
 ---
 
-## 3️⃣ PostgreSQL (Data Layer)
+## 🔧 Infrastructure Components
 
-- PostgreSQL 15-alpine container
-- Uses Docker volumes for persistence
-- Data survives container restarts
-
-Purpose:
-Stores and manages application data.
-
----
-
-# 🔧 Supporting Infrastructure
-
-## 🌐 Nginx Reverse Proxy
-
-A separate Nginx container acts as the entry point for all traffic.
-
-Routing configuration:
-
-/      → Frontend container  
-/api   → Backend container  
-
-It also:
-- Terminates HTTPS connections
-- Uses SSL certificates
-- Keeps internal services isolated from public access
+- **Reverse Proxy:** Nginx  
+- **SSL:** Let’s Encrypt (Certbot)  
+- **DNS:** Cloudflare (DNS-Only mode required)  
+- **Orchestration:** Docker Compose  
+- **Persistence:** Docker Volumes  
 
 ---
 
-## 🔐 SSL with Certbot (Let’s Encrypt)
+## ⚠️ Required Setup
 
-- SSL certificates are generated using Certbot
-- Enables secure HTTPS communication
-- Uses HTTP-01 challenge validation
-
-Certificates are intentionally not included in this repository.
-
----
-
-## ☁️ Cloudflare DNS (DNS-Only Mode Required)
-
-Cloudflare is used to manage DNS records.
-
-Important during SSL generation:
-- The domain must point to the VPS IP
-- Proxy must be set to DNS-Only (grey cloud)
-
-This allows Let’s Encrypt to validate the server correctly.
-
----
-
-## 🐳 Docker Compose
-
-All services are orchestrated using a single docker-compose.yml file.
-
-This provides:
-
-- Multi-container startup
-- Shared internal Docker network
-- Volume persistence
-- Clean separation of services
-- Reproducible environment setup
-
----
-
-# 📂 Technologies Used
-
-Frontend        → Nginx (Static Hosting)  
-Backend         → Node.js  
-Database        → PostgreSQL  
-Reverse Proxy   → Nginx  
-SSL             → Let’s Encrypt (Certbot)  
-DNS             → Cloudflare  
-Orchestration   → Docker Compose  
-Persistence     → Docker Volumes  
-
----
-
-# ⚠️ Required Setup (Not Included)
-
-Since this project simulates a real deployment, certain environment-specific files are not committed.
-
----
-
-## 🔸 1. Create Your Own `.env` File
+### 1. Create `.env` File
 
 Create a `.env` file in the project root:
 
-DB_HOST=database  
-DB_USER=your_db_user  
-DB_PASSWORD=your_db_password  
-DB_NAME=your_db_name  
+```env
+DB_HOST=database
+DB_USER=your_db_user
+DB_PASSWORD=your_db_password
+DB_NAME=your_db_name
+```
 
-Do not commit this file to version control.
+Do not commit this file.
 
 ---
 
-## 🔸 2. Use Your Own Domain
+### 2. Use Your Own Domain
 
 A real domain is required for:
-
-- DNS configuration
 - SSL certificate generation
 - HTTPS access
-
-Let’s Encrypt does not work with localhost or IP addresses.
-
----
-
-# 🔐 Install Certbot (Ubuntu VPS)
-
-Run on your server:
-
-sudo apt update  
-sudo apt install certbot -y  
+- DNS validation
 
 ---
 
-# 🔐 Generate SSL Certificate (Standalone Mode)
+## 🔐 Install Certbot (Ubuntu)
 
-Before running this command:
+```bash
+sudo apt update
+sudo apt install certbot -y
+```
 
-- Ensure port 80 is open
-- Ensure your domain points to your VPS IP
-- Set Cloudflare proxy to DNS-Only
+---
 
-Replace placeholders with your own domain and email:
+## 🔐 Generate SSL Certificate
 
+Before running:
+- Port 80 must be open
+- Domain must point to your VPS
+- Cloudflare must be set to DNS-Only (grey cloud)
+
+```bash
 sudo certbot certonly --standalone \
 -d yourdomain.com \
 --non-interactive \
 --agree-tos \
--m your-email@example.com  
+-m your-email@example.com
+```
 
-After successful generation, certificates will be located at:
+Certificates will be located at:
 
+```
 /etc/letsencrypt/live/yourdomain.com/
-
-These certificates can then be mounted into the Nginx container.
-
----
-
-# 🔁 Renew SSL Certificates
-
-Let’s Encrypt certificates expire every 90 days.
-
-Manual renewal:
-
-sudo certbot renew  
-
-For real-world production, automated renewal should be configured.
+```
 
 ---
 
-# 🎯 What This Project Demonstrates
+## 🔁 Renew SSL Certificates
 
-- Understanding of layered architecture
-- Basic infrastructure thinking
-- Container networking fundamentals
-- Reverse proxy routing logic
-- HTTPS configuration flow
-- DNS validation process
-- Data persistence management
+```bash
+sudo certbot renew
+```
 
 ---
 
-# 📌 Scope Clarification
+## 🎯 What This Project Demonstrates
 
-This is a foundational practice project.
+- Basic 3-tier architecture
+- Container networking
+- Reverse proxy routing
+- HTTPS setup with Let's Encrypt
+- DNS validation flow
+- Persistent database storage
 
-It intentionally does NOT include:
+---
 
-- CI/CD pipelines
+## 📌 Scope
+
+This is a hands-on learning project focused on deployment fundamentals.
+
+It intentionally does not include:
+- CI/CD
 - Kubernetes
-- Monitoring or logging stacks
-- Horizontal scaling
-- Infrastructure as Code
-
-The focus is on mastering deployment fundamentals before moving to more advanced tooling.
+- Monitoring/Logging stacks
+- Scaling strategies
 
 ---
 
-# 🚀 Learning Mindset
+## 🚀 Learning Approach
 
-This project represents my approach to improving:
-
-Learning by building.  
-Understanding the “why” behind each step.  
-Practicing real deployment patterns in a controlled environment.  
-
-It is part of my ongoing journey to become stronger in DevOps and infrastructure engineering.
-
----
-
-# 🧾 Summary
-
-A simple but structured 3-tier containerized application built to practice real-world deployment concepts using Docker, Nginx, PostgreSQL, Certbot, and Cloudflare.
-
-This project reflects hands-on learning and foundational DevOps growth.
+This project reflects my learning-by-doing approach — building small but structured systems to understand how real deployments work before moving to more advanced tools.
