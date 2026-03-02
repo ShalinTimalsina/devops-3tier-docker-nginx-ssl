@@ -2,7 +2,7 @@
 
 This is a foundational DevOps practice project where I’m learning real-world deployment concepts by building a simple 3-tier containerized application.
 
-The goal is not complexity — but understanding how modern applications are structured, secured, and deployed.
+The goal is not complexity, but understanding how modern applications are structured, secured, and deployed.
 
 ---
 
