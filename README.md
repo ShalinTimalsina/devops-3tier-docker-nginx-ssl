@@ -13,7 +13,7 @@ Client → Nginx (Reverse Proxy) → Frontend / Backend → PostgreSQL
 ```
 
 ```bash
-Devops-Project/
+Docker-Project/
 │
 ├── backend/               # Node.js backend API
 │   ├── Dockerfile
