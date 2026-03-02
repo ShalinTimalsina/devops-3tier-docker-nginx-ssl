@@ -126,9 +126,9 @@ server {
 Make sure to replace:
 
 ```bash
-yourdomain.com
+<yourdomain.com>
 ```
-
+- For example `www.example.com` in place of `<yourdomain.com>`
 with your real domain name.
 
 ---
